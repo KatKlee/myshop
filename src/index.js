@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Guard from './components/Guard.jsx';
 import './index.css';
-import App from './App';
+import AdminDashboard from './pages/AdminDashboard/AdminDashboard.jsx';
+import AdminLogin from './pages/AdminLogin/AdminLogin.jsx';
+import Home from './pages/Home/Home.jsx';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/admin/login' element={<AdminLogin />} />
+        <Route element={<Guard />}>
+          <Route path='/admin/dashboard' element={<AdminDashboard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
