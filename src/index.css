@@ -1,5 +1,12 @@
-body {
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 40px 40px 40px 40px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -13,10 +20,85 @@ code {
 }
 
 
-/* Admin Dashboard */
+/* --------------------------------- Admin Dashboard --------------------------------- */
 
-/* Add Product */
+h3 {
+  margin: 10px 0;
+}
+
+/* ------------ Add New Product ------------ */
+
+.addNewProductSection {
+  margin: 40px 0 40px 0;
+}
+
 .addProductInputfields {
   display: flex;
   flex-direction: column;
+  width: 400px;
+}
+
+.newProductThumb {
+  width: 20%;
+}
+
+/* ------------ Product Item List ------------ */
+.productContainer,
+.productListHead {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 3fr 2fr 1fr 0.5fr;
+  /* border-bottom: 1px solid black; */
+  border-top: 1px solid black;
+}
+
+.productListHead {
+  background-color: rgb(222, 222, 222);
+}
+
+.productContainer p,
+.productListHead p {
+  font-size: 0.85em;
+}
+
+.productContainer a {
+  font-size: 0.85em;
+  text-decoration: none;
+  color: magenta
+}
+
+.productImgThumb {
+  width: 30%;
+}
+
+/* ------------ Order List ------------ */
+
+.orderListHead,
+.orderContainer {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 2fr 2fr 1fr 1fr 1fr;
+  /* border-bottom: 1px solid black; */
+  border-top: 1px solid black;
+}
+
+.orderListHead {
+  background-color: rgb(222, 222, 222);
+}
+
+.orderListHead p,
+.orderContainer p {
+  font-size: 0.85em;
+}
+
+/* ------------ Add New Customer ------------ */
+
+.addNewCustomerSection {
+  margin: 40px 0 40px 0;
+}
+
+.addNewCustomerInputfields {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
 }
