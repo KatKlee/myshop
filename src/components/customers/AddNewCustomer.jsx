@@ -14,6 +14,7 @@ const AddNewCustomer = () => {
 
         // post the retrieved data
         // put into useEffect? and/or async function with await?
+        // mit token check?
         fetch('http://localhost:9898/api/customers', {
             method: 'POST',
             headers: {
