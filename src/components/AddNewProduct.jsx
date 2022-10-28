@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 
-const AddNewProduct = () => {
+const AddNewProduct = (props) => {
 
     const [title, setTitle] = useState('')
     const [brand, setBrand] = useState('')
@@ -9,7 +9,7 @@ const AddNewProduct = () => {
     const [info, setInfo] = useState('')
     const [artnum, setArtnum] = useState('')
     const [price, setPrice] = useState('')
-    const [instock, setInstock] = useState('')
+    const [instock, setInstock] = useState(true)
     const [fileBase64, setFileBase64] = useState('')
 
     useEffect(() => {
@@ -30,8 +30,38 @@ const AddNewProduct = () => {
         setFileBase64(event.target.result)
     }
 
-    const addProduct = () => {
-        // code block
+    const addProduct = async () => {
+        const product = {
+            title: title,
+            brand: brand,
+            info: info,
+            articlenr: artnum,
+            price: price,
+            instock: instock,
+            img: fileBase64
+        }
+
+        const response = await fetch('http://localhost:9898/api/products', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authentication': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify(product)
+        })
+        const data = await response.json()
+        props.refresh((prev) => !prev)
+
+        if (data.state) {
+            setTitle('')
+            setBrand('')
+            /* setFile(null) */
+            setInfo('')
+            setArtnum('')
+            setPrice('')
+            setInstock(true)
+        }
+        console.log(data)
     }
 
     return (
@@ -39,14 +69,14 @@ const AddNewProduct = () => {
             <h3>Neues Produkt</h3>
             <article className="addProductInputfields">
                 <img className="newProductThumb" src={fileBase64} alt="" />
-                <input onChange={(e) => { setTitle(e.target.value) }} type="text" name="productTitle" id="" placeholder="Titel" />
-                <input onChange={(e) => { setBrand(e.target.value) }} type="text" name="productBrand" id="" placeholder="Hersteller" />
-                <input onChange={(e) => setFile(e.target.files[0])} type="file" name="productImg" id="" />
-                <input onChange={(e) => { setInfo(e.target.value) }} type="text" name="productInfo" id="" placeholder="Produktbeschreibung" />
-                <input onChange={(e) => { setArtnum(e.target.value) }} type="number" name="productArticleNr" id="" placeholder="Artikelnummer" />
-                <input onChange={(e) => { setPrice(e.target.value) }} type="number" name="productPrice" id="" placeholder="Produktpreis" />
+                <input onChange={(e) => { setTitle(e.target.value) }} type="text" name="productTitle" id="" value={title} placeholder="Titel" />
+                <input onChange={(e) => { setBrand(e.target.value) }} type="text" name="productBrand" id="" value={brand} placeholder="Hersteller" />
+                <input onChange={(e) => setFile(e.target.files[0])} type="file" name="productfile" id="" />
+                <input onChange={(e) => { setInfo(e.target.value) }} type="text" name="productInfo" id="" value={info} placeholder="Produktbeschreibung" />
+                <input onChange={(e) => { setArtnum(e.target.value) }} type="number" name="productArticleNr" id="" value={artnum} placeholder="Artikelnummer" />
+                <input onChange={(e) => { setPrice(e.target.value) }} type="number" name="productPrice" id="" value={price} placeholder="Produktpreis" />
                 <div>
-                    <input onChange={(e) => { console.log(e.target.checked) }} type="checkbox" name="productInstock" id="instock" defaultChecked />
+                    <input onChange={(e) => { setInstock(e.target.checked) }} type="checkbox" name="productInstock" id="" value={instock} defaultChecked />
                     <label htmlFor="instock">in stock</label>
                 </div>
             </article>

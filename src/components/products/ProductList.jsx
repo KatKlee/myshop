@@ -1,10 +1,27 @@
+import { useEffect } from "react"
+import { useState } from "react"
 import ProductItem from "./ProductItem"
-
-// states
 
 // useEffect mit fetch
 
-const ProductList = () => {
+const ProductList = (props) => {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        console.log('liste mounted')
+        fetch('http://localhost:9898/api/products', {
+            headers: {
+                'authentication': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setProducts(data)
+            })
+
+    }, [props.hui])
+
     return (
         <section>
             <h3>Produkte</h3>
@@ -16,9 +33,15 @@ const ProductList = () => {
                 <p>Preis</p>
                 <p>Link</p>
             </article>
-            <ProductItem />
-            <ProductItem />
-            <ProductItem />
+            {products.map((product, key) => {
+                return (
+
+                    <ProductItem
+                        key={key}
+                        product={product}
+                    />
+                )
+            })}
         </section>
     )
 }

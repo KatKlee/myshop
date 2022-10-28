@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Guard from './components/Guard.jsx';
 import './index.css';
 import AdminDashboard from './pages/AdminDashboard/AdminDashboard.jsx';
+import CustomerDetail from './pages/AdminDashboard/CustomerDetail.jsx';
 import AdminLogin from './pages/AdminLogin/AdminLogin.jsx';
 import Home from './pages/Home/Home.jsx';
 import reportWebVitals from './reportWebVitals';
@@ -17,6 +18,7 @@ root.render(
         <Route path='/admin/login' element={<AdminLogin />} />
         <Route element={<Guard />}>
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
+          <Route path='/admin/customerdetail/:id' element={<CustomerDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

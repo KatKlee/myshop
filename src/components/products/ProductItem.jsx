@@ -1,11 +1,11 @@
-const ProductItem = () => {
+const ProductItem = ({ product }) => {
     return (
         <article className="productContainer">
-            <p>true</p>
-            <p>943576324</p>
-            <p>Produktname</p>
-            <p>Marke</p>
-            <p>100 €</p>
+            <p>{String(product.instock)}</p>
+            <p>{product.articlenr}</p>
+            <p>{product.title}</p>
+            <p>{product.brand}</p>
+            <p>{product.price} €</p>
             <a href="#">Link</a>
             {/* <img className="productImgThumb" src="#" alt="" /> */}
             {/* <p>Hier steht eine Produktbeschreibung</p> */}
